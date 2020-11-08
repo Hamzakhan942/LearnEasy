@@ -18,4 +18,44 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// GET student by university ID
+
+router.route('/rollno/:id').get((req, res) => {
+    Student.find()
+    .then(student => res.json(student.filter(student => student.studentId == req.params.id)))
+    .catch(err => res.status(400).json('Error: '+err));
+});
+
+// GET teacher by Database ID
+
+router.route('/:id').get((req, res) => {
+    Student.findById(req.params.id)
+    .then(student => res.json(student))
+    .catch(err => res.status(400).json('Error: '+err));
+});
+
+// UPDATE teacher by database ID
+
+router.route('/update/:id').post((req, res) => {
+    Student.findById(req.params.id)
+    .then(student => {
+        student.studentName = req.body.studentName;
+        student.studentId = req.body.studentId;
+
+        student.save()
+        .then( student => res.json('student Updated'))
+        .catch(err => res.status(400).json('Error: ', err));
+    }
+    )
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
+// DELETE teacher by mongo ID
+
+router.route('/delete/:id').delete((req, res) => {
+    Student.findByIdAndDelete(req.params.id)
+    .then(student => res.json('Student '+ student.studentName + ' has been succesfully deleted!'))
+    .catch(err => res.status(400).json('Error: '+err));
+})
+
 module.exports = router;

@@ -13,15 +13,11 @@ const teacherSchema = new Schema({
         type: String,
         required: true
     },
-    course: {
-        type: String,
-        trim: true,
-        required: true,
-    }
+    course: [String]
 }, {
     timestamps: true,
 });
 
 const Teacher = mongoose.model('teacher', teacherSchema);
  
-module.exports = Teacher;
+module.exports = Teacher; 

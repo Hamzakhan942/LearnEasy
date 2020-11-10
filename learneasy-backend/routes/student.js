@@ -1,8 +1,10 @@
 const router = require('express').Router();
 
+const { authenticate } = require('../middlewares/authentication');
+
 let Student = require('../models/student.model');
 
-router.route('/').get((req, res) => {
+router.route('/').get((req, res) => { 
     Student.find()
         .then(students => res.json(students))
         .catch(err => res.status(400).json('Error: ' + err));
@@ -34,7 +36,7 @@ router.route('/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: '+err));
 });
 
-// UPDATE teacher by database ID
+// UPDATE teacher by database ID 
 
 router.route('/update/:id').post((req, res) => {
     Student.findById(req.params.id)
@@ -58,4 +60,10 @@ router.route('/delete/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: '+err));
 })
 
-module.exports = router;
+// router.route('/login/:id').get(authenticate(Student), (req, res) => { 
+//     Student.find({studentName : req.body.studentName}) 
+//         .then(students => res.json(students))
+//         .catch(err => res.status(400).json('Error: ' + err));  
+// })
+ 
+module.exports = router;  

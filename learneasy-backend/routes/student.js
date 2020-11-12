@@ -1,69 +1,68 @@
 const router = require('express').Router();
-
-const { authenticate } = require('../middlewares/authentication');
-
 let Student = require('../models/student.model');
+const passport = require('../passport');
+// const { compare } = require('bcryptjs');
 
-router.route('/').get((req, res) => { 
-    Student.find()
-        .then(students => res.json(students))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
+router.post('/signup', (req, res) => {
+    console.log('user signup');
 
-router.route('/add').post((req, res) => {
-    const studentName = req.body.studentName;
-    const studentId = req.body.studentId;
+    const { username, password } = req.body
+    // ADD VALIDATION
+    Student.findOne({ username: username }, (err, user) => {
+        if (err) {
+            console.log('User.js post error: ', err)
+        } else if (user) {
+            res.json({
+                error: `Sorry, already a user with the username: ${username}`
+            })
+        }
+        else {
+            const newStudent = new Student({
+                username: username,
+                password: password
+            })
+            newStudent.save((err, savedUser) => {
+                if (err) return res.json(err)
+                res.json(savedUser)
+            }) 
+        }
+    })
+})
 
-    const newStudent = new Student({studentName, studentId});
-    newStudent.save()
-        .then(students => res.json('Student Added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-// GET student by university ID
-
-router.route('/rollno/:id').get((req, res) => {
-    Student.find()
-    .then(student => res.json(student.filter(student => student.studentId == req.params.id)))
-    .catch(err => res.status(400).json('Error: '+err));
-});
-
-// GET teacher by Database ID
-
-router.route('/:id').get((req, res) => {
-    Student.findById(req.params.id)
-    .then(student => res.json(student))
-    .catch(err => res.status(400).json('Error: '+err));
-});
-
-// UPDATE teacher by database ID 
-
-router.route('/update/:id').post((req, res) => {
-    Student.findById(req.params.id)
-    .then(student => {
-        student.studentName = req.body.studentName;
-        student.studentId = req.body.studentId;
-
-        student.save()
-        .then( student => res.json('student Updated'))
-        .catch(err => res.status(400).json('Error: ', err));
+router.post('/login',function (req, res, next) {
+        console.log('routes/user.js, login, req.body: ');
+        console.log(req.body)
+        next()
+    },
+    passport.authenticate('local'),
+    (req, res) => {
+        console.log('logged in', req.user);
+        var userInfo = {
+            username: req.user.username
+        };
+        res.send(userInfo);
     }
-    )
-    .catch(err => res.status(400).json('Error: ' + err));
+)
+
+router.get('/get', (req, res, next) => {
+    console.log('===== user!!======')
+    console.log(req.user)
+    if (req.user) {
+        console.log(req.user)
+        res.json({ user: req.user })
+    } else {
+        console.log('here' + req.user)
+        res.json({ user: null })
+    }
 })
 
-// DELETE teacher by mongo ID
-
-router.route('/delete/:id').delete((req, res) => {
-    Student.findByIdAndDelete(req.params.id)
-    .then(student => res.json('Student '+ student.studentName + ' has been succesfully deleted!'))
-    .catch(err => res.status(400).json('Error: '+err));
+router.post('/logout', (req, res) => {
+    if (req.user) {
+        req.logout()
+        res.send({ msg: 'logging out' })
+    } else {
+        res.send({ msg: 'no user to log out' })
+    }
 })
 
-// router.route('/login/:id').get(authenticate(Student), (req, res) => { 
-//     Student.find({studentName : req.body.studentName}) 
-//         .then(students => res.json(students))
-//         .catch(err => res.status(400).json('Error: ' + err));  
-// })
- 
-module.exports = router;  
+module.exports = router

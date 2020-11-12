@@ -18,7 +18,6 @@ export default class Login extends Component {
             username:'',
             email: "",
             password: "",
-            // redirectTo: null
         }
     }
 
@@ -41,17 +40,18 @@ export default class Login extends Component {
     onSubmit(e) {
         e.preventDefault();
         console.log(this.state.email + ' ' + this.state.password);
-        axios.post('/signup/',  { 
+        axios.post('/student/signup',  { 
             username: this.state.username,
             email: this.state.email,
             password: this.state.password
         })
         .then(response => {
-            if(response.data){
-                console.log('Succesful SignUp');
+            if(!response.data.error){
+                console.log('Succesful SignUp ');
+                console.log(response);
                 this.setState({redirectTo: '/login'})
             } else {
-                console.log('Sign Up error');
+                console.log('Sign Up error: '+response.data.error);
                 this.setState({redirectTo: '/signup'})
             }
         }).catch(err => { 
@@ -60,11 +60,6 @@ export default class Login extends Component {
         })
     }
     render(){
-        // if(this.state.redirectTo){
-        //     return( 
-        //     <Redirect to ={{pathname: this.state.redirectTo}} />
-        //     )
-        // }
         return(
             <div className="container">
             <Form className="mt-4" onSubmit={this.onSubmit}>

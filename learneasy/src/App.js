@@ -12,8 +12,8 @@ function App() {
     <div>
       <Navbar/>
       <Router>
-        <Route path="/login" component={NewLogin}/>
-        <Route path="/signup" component={SignUp}/>
+        <Route path="/student/login" component={NewLogin}/>
+        <Route path="/student/signup" component={SignUp}/>
       </Router>
     </div>
     // <Router>

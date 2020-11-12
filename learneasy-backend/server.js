@@ -3,7 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
-
+const passport = require('./passport');
 
 require('dotenv').config();
 
@@ -23,26 +23,15 @@ app.use(session({
     }
 }))
 
-app.use( (req, res, next) => {
-    console.log('req.session', req.session);
-    next()
-});
-
-// app.post('/signup/', (req, res) => {
-//     console.log('user signup '+ req.body.username);
-//     req.session.username = req.body.username;
-//     // req.session.save()
-//     // res.send({ some: 'json' })
-//     res.end()
-// })  
+// app.use( (req, res, next) => {
+//     console.log('req.session', req.session);
+//     next()
+// });
 
 
-
-// app.get('/', (req, res) => {
-//     console.log('inhere ');
-//     req.session.username = 'hamza';
-//     res.end()
-// })  
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
@@ -52,13 +41,8 @@ connection.once('open', () => {
     console.log("MongoDB database connection established succefully!");
 })
 
-// const teacherRouter = require('./routes/teacher');
-// const studentRouter = require('./routes/student');
-// const loginRouter = require('./routes/login');
-
-// app.use('/teachers', teacherRouter);
-// app.use('/students', studentRouter); 
-// app.use('/login', loginRouter); 
+const studentRouter = require('./routes/student');
+app.use('/student', studentRouter); 
 
 module.exports = app
 

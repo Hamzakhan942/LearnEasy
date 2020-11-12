@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 export default class Login extends Component {
     constructor(props) {
@@ -32,13 +33,22 @@ export default class Login extends Component {
     }
     onSubmit(e) {
         e.preventDefault();
-
-        // if(this.state.password === '123'){
-        //     console.log(this.state.email);
-        //     console.log(this.state.signedIn)
-        //     this.setState({ signedIn: true})
-        // }
-        console.log(this.state.email + ' ' + this.state.password);
+        console.log('In login ' + this.state.email + ' ' + this.state.password);
+        axios.post('/student/login', {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        })
+        .then(response => {
+            if(!response.data.error){
+                console.log('Succesful Login In ');
+                console.log(response);
+                // this.setState({redirectTo: '/login'})
+            } else {
+                console.log('Log In error: '+response.data.error);
+                // this.setState({redirectTo: '/signup'})
+            }
+        })
     }
     render(){
         // if(this.state.signedIn){

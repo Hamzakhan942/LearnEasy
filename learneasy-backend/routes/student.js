@@ -6,9 +6,9 @@ const passport = require('../passport');
 router.post('/signup', (req, res) => {
     console.log('user signup');
 
-    const { username, password } = req.body
+    const { username, email, rollno, password } = req.body
     // ADD VALIDATION
-    Student.findOne({ username: username }, (err, user) => {
+    Student.findOne({ rollno: rollno }, (err, user) => {
         if (err) {
             console.log('User.js post error: ', err)
         } else if (user) {
@@ -19,6 +19,8 @@ router.post('/signup', (req, res) => {
         else {
             const newStudent = new Student({
                 username: username,
+                email: email,
+                rollno: rollno,
                 password: password
             })
             newStudent.save((err, savedUser) => {
@@ -37,23 +39,24 @@ router.post('/login',function (req, res, next) {
     passport.authenticate('local'),
     (req, res) => {
         console.log('logged in', req.user);
-        var userInfo = {
-            username: req.user.username
-        };
-        res.send(userInfo);
+        // var userInfo = {
+        //     username: req.user.username
+        // };
+        res.send( req.user);
     }
 )
 
 router.get('/get', (req, res, next) => {
-    console.log('===== user!!======')
-    console.log(req.user)
-    if (req.user) {
-        console.log(req.user)
-        res.json({ user: req.user })
-    } else {
-        console.log('here' + req.user)
-        res.json({ user: null })
-    }
+    // console.log('===== user!!======')
+    // console.log(req.user)
+    // if (req.user) {
+    //     console.log(req.user)
+    //     res.json({ user: req.user })
+    // } else {
+    //     console.log('here' + req.user)
+    //     res.json({ user: null })
+    // }
+    // return res.redirect('/student/dashboard')
 })
 
 router.post('/logout', (req, res) => {

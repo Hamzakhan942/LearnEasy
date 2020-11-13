@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
@@ -10,20 +10,20 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         
-        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeRollno = this.onChangeRollno.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            email: "",
+            rollno:'',
             password: "",
-            signedIn: false
+            redirectTo: null
         }
     }
 
-    onChangeEmail(e) {
+    onChangeRollno(e) {
         this.setState({
-            email: e.target.value,
+            rollno: e.target.value,
         })
     }
     onChangePassword(e) {
@@ -33,17 +33,15 @@ export default class Login extends Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        console.log('In login ' + this.state.email + ' ' + this.state.password);
         axios.post('/student/login', {
-            username: this.state.username,
-            email: this.state.email,
+            rollno: this.state.rollno,
             password: this.state.password
         })
         .then(response => {
             if(!response.data.error){
                 console.log('Succesful Login In ');
                 console.log(response);
-                // this.setState({redirectTo: '/login'})
+                this.setState({redirectTo: '/student/dashboard'})
             } else {
                 console.log('Log In error: '+response.data.error);
                 // this.setState({redirectTo: '/signup'})
@@ -51,23 +49,23 @@ export default class Login extends Component {
         })
     }
     render(){
-        // if(this.state.signedIn){
-        //     return( 
-        //     <Redirect
-        //     to={{
-        //         pathname: '/dashboard',
-        //         state: {key: this.state.email,
-        //         approved: true}
-        //         }}
-        //     />
-        //     )
-        // }
+        if(this.state.redirectTo){
+            return( 
+            <Redirect
+            to={{
+                pathname: this.state.redirectTo,
+                // state: {key: this.state.email,
+                // approved: true}
+                }}
+            />
+            )
+        }
         return(
             <div className="container">
             <Form className="mt-4" onSubmit={this.onSubmit}>
-                <Form.Group controlId="formBasicEmail" >
-                    <Form.Label>Email address</Form.Label>
-                    <FormControl placeholder="Email" type="email" onChange={this.onChangeEmail} ></FormControl>
+                <Form.Group controlId="formBasicRollno" >
+                    <Form.Label>Roll No</Form.Label>
+                    <FormControl placeholder="Rollno" type="rollno" onChange={this.onChangeRollno} ></FormControl>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -77,7 +75,7 @@ export default class Login extends Component {
                 <Button variant="primary" type="submit" >
                     Login
                 </Button>
-                <Link className="mx-4"to='/signup'>Sign Up</Link>
+                <Link className="mx-4"to='/student/signup'>Sign Up</Link>
             </Form> 
             </div>
         )

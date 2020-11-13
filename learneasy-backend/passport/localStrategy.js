@@ -3,10 +3,11 @@ const LocalStrategy = require('passport-local').Strategy
 
 const strategy = new LocalStrategy(
 	{
-		usernameField: 'username' // not necessary, DEFAULT
+		usernameField: 'rollno', // not necessary, DEFAULT
+		passwordField: 'password'
 	},
 	function(username, password, done) {
-		Student.findOne({ username: username }, (err, user) => {
+		Student.findOne({ rollno: username }, (err, user) => {
 			if (err) {
 				return done(err)
 			}

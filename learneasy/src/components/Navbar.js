@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
@@ -15,7 +15,8 @@ export default class Login extends Component {
                     <Nav.Link href="#home">About Us</Nav.Link>
                     <Nav.Link href="#quiz">Take a Quiz</Nav.Link>
                     <Nav.Link href="#contacts">Contact Us</Nav.Link>
-                    <Nav.Link href="#login">Log In</Nav.Link>
+                    <Nav.Link href="/student/signup">Sign Up</Nav.Link>
+                    <Nav.Link href="#login">Log Out</Nav.Link>
                 </Nav>
         </Navbar>
         )

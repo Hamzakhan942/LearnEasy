@@ -18,9 +18,9 @@ app.use(session({
     secret: 'fraggle-rock',
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        secure: false
-    }
+    // cookie: {
+    //     secure: false
+    // }
 }))
 
 // app.use( (req, res, next) => {
@@ -32,6 +32,12 @@ app.use(session({
 // Passport
 app.use(passport.initialize())
 app.use(passport.session()) // calls the deserializeUser
+
+app.use((req, res, next) => {
+    console.log(req.session);
+    console.log(req.user);
+    next();
+})
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});

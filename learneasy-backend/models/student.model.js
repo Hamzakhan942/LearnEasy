@@ -12,7 +12,11 @@ const studentSchema = new Schema({
     },
     email: {
         type: String,
-        required: false
+        required: true
+    },
+    rollno: {
+        type: String,
+        required: true
     },
     password: {
         type: String,

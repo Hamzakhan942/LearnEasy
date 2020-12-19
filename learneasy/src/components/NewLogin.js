@@ -62,15 +62,17 @@ export default class Login extends Component {
         }
         return(
             <div className="container">
+                <br/>
+                <h1>Login Form</h1>
             <Form className="mt-4" onSubmit={this.onSubmit}>
                 <Form.Group controlId="formBasicRollno" >
                     <Form.Label>Roll No</Form.Label>
-                    <FormControl placeholder="Rollno" type="rollno" onChange={this.onChangeRollno} ></FormControl>
+                    <FormControl placeholder="17K-1234" type="rollno" onChange={this.onChangeRollno} required></FormControl>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <FormControl placeholder="Password" type="password" onChange={this.onChangePassword}></FormControl>
+                    <FormControl placeholder="Password" type="password" onChange={this.onChangePassword} min="8" max="15"  required></FormControl>
                 </Form.Group>
                 <Button variant="primary" type="submit" >
                     Login

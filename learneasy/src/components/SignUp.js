@@ -73,25 +73,30 @@ export default class Login extends Component {
     render(){
         return(
             <div className="container">
+                <br/>
+                <h1>Sign Up Form</h1>
             <Form className="mt-4" onSubmit={this.onSubmit}>
                 <Form.Group controlId="formBasicUsername" >
                     <Form.Label>User Name</Form.Label>
-                    <FormControl placeholder="Username" type="username" onChange={this.onChangeUsername} ></FormControl>
+                    <FormControl placeholder="Username" type="username" onChange={this.onChangeUsername} required></FormControl>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail" >
                     <Form.Label>Email address</Form.Label>
-                    <FormControl placeholder="Email" type="email" onChange={this.onChangeEmail} ></FormControl>
+                    <FormControl placeholder="name@nu.edu.pk" type="email" onChange={this.onChangeEmail} required></FormControl>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicRollno" >
-                    <Form.Label>Email address</Form.Label>
-                    <FormControl placeholder="Rollno" type="rollno" onChange={this.onChangeRollno} ></FormControl>
+                    <Form.Label>Roll no.</Form.Label>
+                    <FormControl placeholder="Eg: 17K-1234" type="rollno" onChange={this.onChangeRollno} required></FormControl>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <FormControl placeholder="Password" type="password" onChange={this.onChangePassword}></FormControl>
+                    <FormControl placeholder="At least 8 characters and not more than 20" type="password" onChange={this.onChangePassword} min="8" max="15" required></FormControl>
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    </small>
                 </Form.Group>
                 <Button variant="primary" type="submit" >
                     Sign Up

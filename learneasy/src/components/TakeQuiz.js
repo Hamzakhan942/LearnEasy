@@ -11,192 +11,58 @@ import Cat from './Images/Cat.png';
 import Dog from './Images/Dog.png';
 import Horse from './Images/Horse.png';
 
+import QuizCardFigures from './QuizCardFigures';
+import QuizCard from './QuestionCard'
+import QuizMcq from './QuizMcq'
+import { Redirect } from 'react-router-dom';
+
 
 export class TakeQuiz extends Component {
     constructor(props) {
         super(props);
         
-        this.onClick = this.onClick.bind(this);
+        // this.onClick = this.onClick.bind(this);
 
         this.state = {
-            rollno: '',
-            q1: '',
-            q2: '',
-            q3: '',
-            q4: '',
-            q5: ''
+            subject: "Cognitive Recall",
+            score: 0,
+            total: 10,
+            comments: "You Have Show Immese Improvements... Keet it Up!"
         }
+        this.handleScore = this.handleScore.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    onToggleOne = (e) =>{
-        this.setState( {q1: e.target.value} )
+    handleScore(){
+        this.setState({score: this.state.score + 1})
     }
-
-    onToggleTwo = (e) =>{
-        this.setState( {q2: e.target.value} )
-    }
-
-    onToggleThree = (e) =>{
-        this.setState( {q3: e.target.value} )
-    }
-
-    onToggleFour = (e) =>{
-        this.setState( {q4: e.target.value} )
-    }
-
-    onToggleFive = (e) =>{
-        this.setState( {q5: e.target.value} )
-    }
-
-
-    //When pressing submit
-    onClick = (e) => {
-        e.preventDefault();
-        axios.post('/student/takequiz', {
-            rollno: this.state.rollno,
-            q1: this.state.q1,
-            q2: this.state.q2,
-            q3: this.state.q3,
-            q4: this.state.q4,
-            q5: this.state.q5
-        })
-        .then(response => {
-            if(!response.data.error){
-                console.log('Thank you for submitting the quiz!');
-                console.log(response);
-                //Will need to add/change the redirectlink in this case. Possibly to a new page that reirects you to the score field
-                this.setState({redirectTo: '/student/dashboard'})
-            }
-        })
+    
+    handleSubmit(e){
+        axios.post('/student/score', {
+            subject: this.state.subject,
+            score: this.state.score,
+            total: this.state.total,
+            comments: this.state.comments
+        }).then(res => console.log("Got Res"))
     }
     
     render() {
         return (
-            <div className="container">
-                <br/>
-                <h1>Welcome to your quiz!</h1>
-                <p>
-                    You have 5 questions. Select the correct answers. You can use different learning aids to help you through the quiz.
-                </p>
-                <br/>
-                <div className="Q1">
-                    <h6>
-                        Q1.) Match the same colors
-                    </h6>
-                    <img src= { Red } title="Red" width="200" alt='red'/>
-                    <FormGroup tag="fieldset">
-                    <legend>Choose:</legend>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='1' onChange={this.onToggleOne} />{' '}
-                        <img src= { Red } height="150" width="150" alt='red'/>
-                    </Label>
-                    </FormGroup>
-                    <br/>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='1' onChange={this.onToggleOne}/>{' '}
-                        <img src= { Black } height="150" width="150" alt='black'/>
-                    </Label>
-                    </FormGroup>
-                    </FormGroup>
+            <div>
+                <QuizMcq questionDetails="Pick the Correct Animal" q='1' scorer={this.handleScore} answer={'option3'} question={Cow} one={'It is a Dog'} two={'It is a Lizzard'} three={'It is a Cow'} four={'It is a Mouse'}/>
+                <QuizCardFigures questionDetails="Choose The Matching Color" q='2' scorer={this.handleScore} answer={'option3'} question={Red} one={Blue} two={Green} three={Red} four={Black}/>
+                <QuizCardFigures questionDetails="Choose The Matching Animal" q='3' scorer={this.handleScore} answer={'option4'} question={Horse} one={Dog} two={Cow} three={Cat} four={Horse}/>
+                <QuizCardFigures questionDetails="Choose The Matching Color" q='4' scorer={this.handleScore} answer={'option2'} question={Green} one={Blue} two={Green} three={Red} four={Black}/>
+                <QuizCardFigures questionDetails="Choose The Matching Animal" q='5' scorer={this.handleScore} answer={'option1'} question={Dog} one={Dog} two={Cow} three={Cat} four={Horse}/>
+                <QuizMcq questionDetails="Pick the Correct Weather" q='6' scorer={this.handleScore} answer={'option1'} question={Rainy} one={'It is Rainy'} two={'It is Sunny'} three={'It is Cloudy'} four={'It is Snowing'}/>
+                <QuizCardFigures questionDetails="Choose The Matching Color" q='7' scorer={this.handleScore} answer={'option4'} question={Black} one={Blue} two={Green} three={Red} four={Black}/>
+                <QuizMcq questionDetails="Pick the Correct Weather" q='8' scorer={this.handleScore} answer={'option1'} question={Rainy} one={'It is Rainy'} two={'It is Sunny'} three={'It is Cloudy'} four={'It is Snowing'}/>
+                <QuizCardFigures questionDetails="Choose The Matching Animal" q='9' scorer={this.handleScore} answer={'option3'} question={Cat} one={Dog} two={Cow} three={Cat} four={Horse}/>
+                <QuizMcq questionDetails="Pick the Correct Weather" q='10' scorer={this.handleScore} answer={'option1'} question={Rainy} one={'It is Rainy'} two={'It is Sunny'} three={'It is Cloudy'} four={'It is Snowing'}/>
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: "70px"}}>
+                <Button style={{width: '200px', height:'50px'}} onClick={this.handleSubmit} color="danger">Submit Quiz</Button> 
                 </div>
-                <div>
-                    <h6>
-                        Q2.) What is the weather?
-                    </h6>
-                    <img src= { Rainy } title='Rainy scene' width="200" alt='Rainy'/>
-                    <FormGroup tag="fieldset">
-                    <legend>Choose:</legend>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='2' onChange={this.onToggleTwo}/>{' '}
-                        Sunny
-                    </Label>
-                    </FormGroup>
-                    <br/>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='2' onChange={this.onToggleTwo}/>{' '}
-                        Rainy
-                    </Label>
-                    </FormGroup>
-                    </FormGroup>
-                </div>
-                <div>
-                    <h6>
-                        Q3.) Match the color
-                    </h6>
-                    <img src= { Green } title="Green" width="200" alt='Green'/>
-                    <FormGroup tag="fieldset">
-                    <legend>Choose:</legend>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='3' onChange={this.onToggleThree}/>{' '}
-                        <img src= { Blue } height="150" width="150" alt='blue'/>
-                    </Label>
-                    </FormGroup>
-                    <br/>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='3'onChange={this.onToggleThree}/>{' '}
-                        <img src= { Green } height="150" width="150" alt='green'/>
-                    </Label>
-                    </FormGroup>
-                    </FormGroup>
-                </div>
-                <div>
-                    <h6>
-                        Q4.) Select the correct animal:
-                    </h6>
-                    <img src= { Cow } title="Cow" width="200" alt='Cow'/>
-                    <FormGroup tag="fieldset">
-                    <legend>Choose:</legend>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='4'onChange={this.onToggleFour}/>{' '}
-                        Cow
-                    </Label>
-                    </FormGroup>
-                    <br/>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='4'onChange={this.onToggleFour} />{' '}
-                        Horse
-                    </Label>
-                    </FormGroup>
-                    </FormGroup>
-                </div>
-                <div>
-                    <h6>
-                        Q5.) Select the correct animal:
-                    </h6>
-                    <img src= { Horse } title="Horse" width="200" alt='Horse'/>
-                    <FormGroup tag="fieldset">
-                    <legend>Choose:</legend>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='5' onChange={this.onToggleFive}/>{' '}
-                        <img src= { Cat } width="150" alt='Cat'/>
-                    </Label>
-                    </FormGroup>
-                    <br/>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='5' onChange={this.onToggleFive}/>{' '}
-                        <img src= { Horse } width="150" alt='Horse'/>
-                    </Label>
-                    </FormGroup>
-                    <br/>
-                    <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" id='5'onChange={this.onToggleFive}/>{' '}
-                        <img src= { Dog } width="150" alt='Dog'/>
-                    </Label>
-                    </FormGroup>
-                    </FormGroup>
-                </div>
-                <Button size="10em" color="primary" onClick={this.onClick}>Submit</Button>
+                
             </div>
         )
     }

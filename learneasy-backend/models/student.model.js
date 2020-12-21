@@ -22,6 +22,8 @@ const studentSchema = new Schema({
         type: String,
         required: true
     },
+    scores: [
+    ],
 }, {
     timestamps: true,
 });

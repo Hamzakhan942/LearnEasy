@@ -47,6 +47,8 @@ connection.once('open', () => {
     console.log("MongoDB database connection established succefully!");
 })
 
+mongoose.set('useFindAndModify', false);
+
 const studentRouter = require('./routes/student');
 app.use('/student', studentRouter); 
 

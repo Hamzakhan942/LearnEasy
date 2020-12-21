@@ -101,7 +101,7 @@ export default class Login extends Component {
                 <Button variant="primary" type="submit" >
                     Sign Up
                 </Button>
-                <Link className="mx-4"to='/student/login'>Log In</Link>
+                <Link className="mx-4"to='/login'>Log In</Link>
             </Form> 
             </div>
         )

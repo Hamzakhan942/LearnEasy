@@ -1,7 +1,19 @@
 const router = require('express').Router();
 let Student = require('../models/student.model');
 const passport = require('../passport');
+const { redirect } = require('../passport/localStrategy');
+const checkAuthenticated = require('../passport/middleware');
 // const { compare } = require('bcryptjs');
+
+// function checkAuthenticated(req, res, next){
+//     console.log("HEre")
+//     if(req.isAuthenticated()){
+//         next()
+//     } else{
+//         res.redirect('http://localhost:3000/login')
+//     }
+
+// }
 
 router.post('/signup', (req, res) => {
     console.log('user signup');
@@ -21,7 +33,8 @@ router.post('/signup', (req, res) => {
                 username: username,
                 email: email,
                 rollno: rollno,
-                password: password
+                password: password,
+                scores: []
             })
             newStudent.save((err, savedUser) => {
                 if (err) return res.json(err)
@@ -46,7 +59,7 @@ router.post('/login',function (req, res, next) {
     }
 )
 
-router.get('/get', (req, res, next) => {
+router.get('/get', checkAuthenticated, (req, res, next) => {
     console.log('===== user!!======')
     console.log(req.user)
     if (req.user) {
@@ -57,6 +70,34 @@ router.get('/get', (req, res, next) => {
         res.json({ user: null })
     }
     // return res.redirect('/student/dashboard')
+})
+
+router.get('/details', checkAuthenticated, (req, res) => {
+    if (req.user) {
+        Student.findById(req.user._id, (err, resp) => { 
+            console.log("Sending.." + resp)
+            res.json(resp)
+        });
+    } else {
+        res.send({ msg: 'no user Found' })
+    }
+})
+
+router.post('/score', (req, res) => {
+    // console.log(req.body)
+    let newValue = {subject: req.body.subject, score: req.body.score, total:req.body.total, comments: req.body.comments}
+    console.log(newValue)
+    Student.findByIdAndUpdate(
+        req.user._id, 
+        { $push: {scores: newValue}},
+        function (error, success) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Success");
+            }
+        }
+        )
 })
 
 router.post('/logout', (req, res) => {

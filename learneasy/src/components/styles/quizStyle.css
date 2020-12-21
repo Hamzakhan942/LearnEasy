@@ -1,0 +1,27 @@
+#green{
+    background-image: url('../Images/Green.png');
+    width:60%;
+    height:50px;
+    border-style: none;
+}
+
+#red{
+    background-image: url('../Images/Red.png');
+    width:60%;
+    height:50px;
+    border-style: none;
+}
+
+#blue{
+    background-image: url('../Images/Blue.png');
+    width:60%;
+    height:50px;
+    border-style: none;
+}
+
+#black{
+    background-image: url('../Images/Black.png');
+    width:60%;
+    height:50px;
+    border-style: none;
+}

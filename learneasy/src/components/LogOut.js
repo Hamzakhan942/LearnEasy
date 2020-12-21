@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import axios from 'axios';
 
 const ModalExample = (props) => {
   const {
@@ -7,6 +8,17 @@ const ModalExample = (props) => {
   } = props;
 
   const logout = (e) =>{
+    axios.post('/student/logout')
+  .then(response => {
+      if(!response.data.error){
+          console.log('Succesful Login out');
+          console.log(response);
+          this.setState({redirectTo: '/student/dashboard'})
+      } else {
+          console.log('Log out error: '+response.data.error);
+          // this.setState({redirectTo: '/signup'})
+      }
+  })
     console.log('You are logged out')
   }
   return (

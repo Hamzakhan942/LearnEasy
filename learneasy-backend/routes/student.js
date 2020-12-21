@@ -39,30 +39,33 @@ router.post('/login',function (req, res, next) {
     passport.authenticate('local'),
     (req, res) => {
         console.log('logged in', req.user);
-        // var userInfo = {
-        //     username: req.user.username
-        // };
+        var userInfo = {
+            username: req.user.username
+        };
         res.send( req.user);
     }
 )
 
 router.get('/get', (req, res, next) => {
-    // console.log('===== user!!======')
-    // console.log(req.user)
-    // if (req.user) {
-    //     console.log(req.user)
-    //     res.json({ user: req.user })
-    // } else {
-    //     console.log('here' + req.user)
-    //     res.json({ user: null })
-    // }
+    console.log('===== user!!======')
+    console.log(req.user)
+    if (req.user) {
+        console.log(req.user)
+        res.json({ user: req.user })
+    } else {
+        console.log('here' + req.user)
+        res.json({ user: null })
+    }
     // return res.redirect('/student/dashboard')
 })
 
 router.post('/logout', (req, res) => {
     if (req.user) {
+        console.log("Logging out")
+        console.log(req.user)
         req.logout()
         res.send({ msg: 'logging out' })
+        console.log(req.user)
     } else {
         res.send({ msg: 'no user to log out' })
     }

@@ -23,10 +23,10 @@ app.use(session({
     // }
 }))
 
-// app.use( (req, res, next) => {
-//     console.log('req.session', req.session);
-//     next()
-// });
+app.use( (req, res, next) => {
+    console.log('req.session', req.session);
+    next()
+});
 
 
 // Passport

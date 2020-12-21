@@ -37,12 +37,15 @@ export default class Login extends Component {
     }
     render(){
         if(this.state.signedIn){
-            return <Redirect
+            return( 
+            <Redirect
             to={{
                 pathname: '/dashboard',
-                state: {key: this.state.email}
-            }}
+                state: {key: this.state.email,
+                approved: true}
+                }}
             />
+            )
         }
         return(
             <form className="Form" onSubmit={this.onSubmit}>
@@ -60,6 +63,6 @@ export default class Login extends Component {
                 type="submit"
             >Sign In</button>
             </form>
-        )
+            )
     }
 }

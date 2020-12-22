@@ -6,7 +6,7 @@ import ModalExample from "./LogOut"
 import logo from '../static/logo-4.png'
 
 
-export default class Login extends Component {
+export default class NavTopbar extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -22,7 +22,7 @@ export default class Login extends Component {
         return(
             <div>
             <Navbar sticky="top" bg="secondary" variant="dark" className="ma-auto">
-                <Navbar.Brand className="ml-2 mr-5" href="/aboutus"><img src={logo} alt="Logo" width="60" height="60"/></Navbar.Brand>
+                <Navbar.Brand className="ml-2 mr-5" href="/"><img src={logo} alt="Logo" width="60" height="60"/></Navbar.Brand>
                 <Nav className="ma-auto">
                     <Nav.Link className="mx-4" href="/aboutus">About Us</Nav.Link>
                     <Nav.Link className="mx-4" href="/signup">Sign Up</Nav.Link>

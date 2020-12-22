@@ -6,11 +6,11 @@ const checkAuthenticated = require('../passport/middleware');
 // const { compare } = require('bcryptjs');
 
 // function checkAuthenticated(req, res, next){
-//     console.log("HEre")
+    
 //     if(req.isAuthenticated()){
 //         next()
 //     } else{
-//         res.redirect('http://localhost:3000/login')
+//         res.sendStatus(401)
 //     }
 
 // }
@@ -100,7 +100,7 @@ router.post('/score', (req, res) => {
         )
 })
 
-router.post('/logout', (req, res) => {
+router.post('/logout', checkAuthenticated, (req, res) => {
     if (req.user) {
         console.log("Logging out")
         console.log(req.user)

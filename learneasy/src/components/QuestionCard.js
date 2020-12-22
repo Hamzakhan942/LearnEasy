@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, Label, Input, Row} from 'reactstrap';
-import { Card, CardTitle, CardText, Container, Col } from 'reactstrap';
+import { Row} from 'reactstrap';
+import { Card, Container, Col } from 'reactstrap';
 import Red from './Images/Red.png';
 import './styles/quizStyle.css';
-import axios from 'axios';
 
 
 export class QuizCard extends Component {
@@ -28,26 +27,8 @@ export class QuizCard extends Component {
         if(this.state[this.state.correct]){
             this.setState({score: 1})
         }
-        // console.log("Sending to db");
-        // axios.post('/student/score', {score: this.state.score, subject: this.state.subject})
-        // .then(response => {
-        //     if(!response.data.error){
-        //         console.log('Succesful Scoring ');
-        //         console.log(response);
-        //     } else {
-        //         console.log('Scoring error: '+response.data.error);
-        //     }
-        // }).catch(err => { 
-        //     console.log('Server Error: ' + err);
-        //     this.setState({redirectTo: '/signup'})
-        // })
+
     }
-
-    
-
-    // <div className="container">
-    //             <button type="radio" name='option2' onClick={this.onChoiceSelection}> Click</button>
-    //         </div>
     
     render() {
         console.log(this.state)
@@ -60,7 +41,7 @@ export class QuizCard extends Component {
                         <h1>Question {this.props.q}:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={Red} width="80%" height="50px"/>
+                    <img src={Red} alt={"Red"} width="80%" height="50px"/>
                 </Col>
                 <Col>
                     <Row>
@@ -94,7 +75,7 @@ export class QuizCard extends Component {
                         <h1>Question 2:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={Red} width="80%" height="50px"/>
+                    <img src={Red} alt={"Red"} width="80%" height="50px"/>
                 </Col>
                 <Col>
                     <Row>
@@ -128,7 +109,7 @@ export class QuizCard extends Component {
                         <h1>Question 3:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={Red} width="80%" height="50px"/>
+                    <img src={Red} alt={"Red"} width="80%" height="50px"/>
                 </Col>
                 <Col>
                     <Row>
@@ -162,7 +143,7 @@ export class QuizCard extends Component {
                         <h1>Question 4:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={Red} width="80%" height="50px"/>
+                    <img src={Red} alt={"Red"} width="80%" height="50px"/>
                 </Col>
                 <Col>
                     <Row>
@@ -196,7 +177,7 @@ export class QuizCard extends Component {
                         <h1>Question 5:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={Red} width="80%" height="50px"/>
+                    <img src={Red} alt={"Red"} width="80%" height="50px"/>
                 </Col>
                 <Col>
                     <Row>
@@ -230,7 +211,7 @@ export class QuizCard extends Component {
                         <h1>Question 6:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={Red} width="80%" height="50px"/>
+                    <img src={Red} alt={"Red"} width="80%" height="50px"/>
                 </Col>
                 <Col>
                     <Row>
@@ -264,7 +245,7 @@ export class QuizCard extends Component {
                         <h1>Question 7:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={Red} width="80%" height="50px"/>
+                    <img src={Red} alt={"Red"} width="80%" height="50px"/>
                 </Col>
                 <Col>
                     <Row>

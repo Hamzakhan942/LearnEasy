@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from 'reactstrap';
-import { Card, Button, CardHeader, CardBody,CardTitle, CardText } from 'reactstrap';
+import { Card, CardHeader, CardBody,CardTitle, CardText } from 'reactstrap';
 
 export default class Dashboard extends Component {
     constructor(props){
@@ -19,7 +19,6 @@ export default class Dashboard extends Component {
     }
 
     render(){
-        console.log(this.state)
         return(
             <Container fluid>
             <Row style={{marginBottom: '20px'}}>

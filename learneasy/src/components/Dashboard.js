@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Badge, Container, Row, Col } from 'reactstrap';
 import { Card, Button, CardHeader, CardBody,CardTitle, CardText } from 'reactstrap';
 import axios from 'axios';
 import ScoreCard from './ScoreCard';
 import { Link } from "react-router-dom";
+import Unauth from './Unauth.js'
+import { Spinner } from 'reactstrap';
 
 export default class Dashboard extends Component {
 
@@ -11,41 +12,38 @@ export default class Dashboard extends Component {
         super(props);
 
         this.state = {
+            waiting: true,
             authorize: false,
             username: '',
             email: '',
             rollno: '',
-            scores: [{'subject': 'english', 'marks': '15', 'total': '20', 'comments': 'You Showed Major Improvement!'}]
+            scores: []
         }
     }
 
-    // componentDidMount(){
-    //     axios.get('/student/details')
-    //     .then(response => response.data)
-    //     .then(details => {
-    //         let newState = {...details, authorize: true}
-    //         this.setState(newState)
-    //     })
-    // }
     componentDidMount(){
         axios.get('/student/details')
         .then(response => response.data)
         .then(details => {
-            this.setState({authorize: true})
-            let newState = {
+            this.setState({
+                waiting: false,
+                authorize: true, 
                 username: details.username, 
                 email: details.email,
                 rollno: details.rollno,
-            }
-            let newScore={}
+            })
             details.scores.forEach(element => {
-                newScore = element.score
-                
+                var subject = element.subject
+                var score = element.score
+                var total = element.total
+                var comments = element.comments
+                this.setState({scores: [...this.state.scores, {subject, score, total, comments}]})
             });
-        })
+            console.log(this.state)
+        }).catch(err => this.setState({waiting: false}))
     }
     render(){
-        if(this.state.authorize){
+        if(this.state.authorize && !this.state.waiting){
             return(
                 <div>
                 <Card style={{margin: '15px'}}>
@@ -56,26 +54,26 @@ export default class Dashboard extends Component {
                         <Link to="/takequiz"><Button color="primary"> Take a Quiz</Button></Link>
                     </CardBody>
                 </Card>
-                {this.state.scores.map(item => <ScoreCard subject={'english'} total={'20'} marks={'12'} comments={'good!'}/>)}
+                {this.state.scores.map(item => <ScoreCard subject={item.subject} total={item.total} marks={item.score} comments={item.comments}/>)}
+                </div>
+            )
+        }
+        else if(!this.state.authorize && this.state.waiting){
+            return (
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '85vh'}}>
+                    <Spinner type="grow" color="primary" />
+                    <Spinner type="grow" color="secondary" />
+                    <Spinner type="grow" color="success" />
+                    <Spinner type="grow" color="danger" />
+                    <Spinner type="grow" color="warning" />
+                    <Spinner type="grow" color="info" />
+                    <Spinner type="grow" color="dark" />
                 </div>
             )
         }
         else{
             return (
-                <Container>
-                <Row>
-                    <Col lg={{size: 12}}>
-                        <Badge color="danger" className="m-12 p-12" style={{margin: '50px', fontSize: '50px' ,width: '700px', height: '80px' ,textAlign: "center", alignSelf: "center"}}>
-                            Not Authorized!
-                        </Badge>
-                    </Col>
-                </Row>
-                <Row>
-                <Col lg={{size: 12}}>
-                        <a style={{margin: '50px', fontSize: '50px' ,width: '700px', height: '80px' ,textAlign: "center", alignSelf: "center"}} href="/login">Log In</a>
-                    </Col>
-                </Row>
-                </Container>
+                 <Unauth />
                 )
         }
     }

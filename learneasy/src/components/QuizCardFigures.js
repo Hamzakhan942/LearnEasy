@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, Label, Input, Row} from 'reactstrap';
-import { Card, CardTitle, CardText, Container, Col } from 'reactstrap';
+import { Button, Row} from 'reactstrap';
+import { Card, Container, Col } from 'reactstrap';
 import './styles/quizStyle.css';
 
 
@@ -43,31 +43,31 @@ export class QuizCardFigures extends Component {
                         <h1>Question {this.props.q}:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={this.props.question} width="200px" height="150px"/>
+                    <img src={this.props.question} alt={"question"} width="200px" height="150px"/>
                 </Col>
                 <h1>Pick One {this.state.score}</h1>
                 <Col>
                     <Row>
                         <Col className="mx-2">
                         <Button type="submit" className="p-12 m-12" color='white' name='option1' onClick={this.onChoiceSelection}>
-                        <img src={this.props.one} width="80px" height="80px"/>
+                        <img src={this.props.one} alt={"Option 1"} width="80px" height="80px"/>
                         </Button>
                         </Col>
                         <Col>
                         <Button type="radio" className="p-12 m-12" color='white' name='option2' onClick={this.onChoiceSelection}>
-                        <img src={this.props.two} width="80px" height="80px"/>
+                        <img src={this.props.two} alt={"Option 2"} width="80px" height="80px"/>
                         </Button>
                         </Col>
                     </Row>
                     <Row className="my-5">
                         <Col className="mx-2">
                         <Button type="radio" className="p-12 m-12" color='white' name='option3' onClick={this.onChoiceSelection}>
-                        <img src={this.props.three} width="80px" height="80px"/>
+                        <img src={this.props.three} alt={"Option 3"} width="80px" height="80px"/>
                         </Button>
                         </Col>
                         <Col>
                         <Button type="radio" className="p-12 m-12" color='white' name='option4' onClick={this.onChoiceSelection}>
-                        <img src={this.props.four} width="80px" height="80px"/>
+                        <img src={this.props.four} alt={"Option 4"} width="80px" height="80px"/>
                         </Button>
                         </Col>
                     </Row>

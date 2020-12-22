@@ -14,19 +14,43 @@ const AboutUs = (props) => {
             communicate it
           </p>
           <p className="lead">
-            With such a large number of people suffering with learning disabilities, it
-            is integral to put forth solutions to their daily problems for the purpose of
-            educating them effectively.
+          We can give children that extra time to develop their skills if we identify
+          learning disabilities early. When we identify language learning disabilities in a
+          young child, he or she has more time to learn to read and write with less
+          difficulty.
           </p>
           <p className="lead">
-            This project suggests a system that works as a pedagogical or learning aid
-            for those with learning disabilities by providing to them an environment
-            that enables ease of understanding and communication
+          Our system is such an assistive tool for those that suffer from learning
+          disabilities. We aim to make the process of learning easier by ensuring that
+          we recognize the symptoms and consequences of the disability and use
+          technology smartly to overcome them.
           </p>
           <p className="lead">
-            With two panels; one for the instructor and other for the student, this
-            system will apply the concepts of human computer interaction according
-            to each user.
+          This system uses the rules of human computer interaction to minimize the
+          dependency on the memory of the user and focus on using intuitive tools and
+          hints to make learning easier.
+          </p>
+          <p className="lead">
+            While the instructors will have a simple interface for conducting quizzes
+            and evaluating each student, the main challenge comes forth while
+            interacting with those with learning disabilities.
+          </p>
+          <p className="lead">
+          We can give children that extra time to develop their skills if we identify
+          learning disabilities early. When we identify language learning disabilities in a
+          young child, he or she has more time to learn to read and write with less
+          difficulty.
+          </p>
+          <p className="lead">
+          Our system is such an assistive tool for those that suffer from learning
+          disabilities. We aim to make the process of learning easier by ensuring that
+          we recognize the symptoms and consequences of the disability and use
+          technology smartly to overcome them.
+          </p>
+          <p className="lead">
+          This system uses the rules of human computer interaction to minimize the
+          dependency on the memory of the user and focus on using intuitive tools and
+          hints to make learning easier.
           </p>
           <p className="lead">
             While the instructors will have a simple interface for conducting quizzes

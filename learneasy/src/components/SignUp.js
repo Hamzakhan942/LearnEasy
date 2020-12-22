@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
@@ -94,7 +93,7 @@ export default class Login extends Component {
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <FormControl placeholder="At least 8 characters and not more than 20" type="password" onChange={this.onChangePassword} min="8" max="15" required></FormControl>
-                    <small id="passwordHelpBlock" class="form-text text-muted">
+                    <small id="passwordHelpBlock" className="form-text text-muted">
                         Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                     </small>
                 </Form.Group>

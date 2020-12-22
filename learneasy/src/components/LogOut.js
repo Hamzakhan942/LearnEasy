@@ -13,13 +13,12 @@ const ModalExample = (props) => {
       if(!response.data.error){
           console.log('Succesful Login out');
           console.log(response);
-          this.setState({redirectTo: '/student/dashboard'})
+          window.location.replace('http://localhost:3000/')
       } else {
           console.log('Log out error: '+response.data.error);
-          // this.setState({redirectTo: '/signup'})
       }
   })
-    console.log('You are logged out')
+  .catch(err => console.log(err))
   }
   return (
     <div>

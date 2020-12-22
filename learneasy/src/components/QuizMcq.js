@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, Label, Input, Row} from 'reactstrap';
-import { Card, CardTitle, CardText, Container, Col } from 'reactstrap';
+import { Button, Row} from 'reactstrap';
+import { Card, Container, Col } from 'reactstrap';
 import './styles/quizStyle.css';
 
 export class QuizMcq extends Component {
@@ -19,7 +19,6 @@ export class QuizMcq extends Component {
     }
 
     onChoiceSelection(e){
-        console.log("lets see " + this.state[this.state.correct])
         this.setState({[e.target.name]: true}, () => {
             if(this.state[this.state.correct]){
                 this.setState({[e.target.name]: false, score: 1})
@@ -32,7 +31,6 @@ export class QuizMcq extends Component {
     }
     
     render() {
-        console.log(this.state)
         return (
             <Container>
             <Row>
@@ -42,7 +40,7 @@ export class QuizMcq extends Component {
                         <h1>Question {this.props.q}:</h1>
                         <h2>{this.props.questionDetails}</h2>
                     </div>
-                    <img src={this.props.question} width="200px" height="150px"/>
+                    <img src={this.props.question} alt={"Question"} width="200px" height="150px"/>
                 </Col>
                 <h1>Pick One {this.state.score}</h1>
                 <Col>

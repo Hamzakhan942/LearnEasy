@@ -22,10 +22,10 @@ export default class Home extends Component {
         let directionButton;
         if(this.state.account){
             formLook = <NewLogin />
-            directionButton = <Button style={{marginLeft: '50px', marginBottom: '20px'}} onClick={() => this.setState({account: false})}>Sign Up Now</Button>
+            directionButton = <Button color="primary" style={{marginLeft: '50px', marginBottom: '20px'}} onClick={() => this.setState({account: false})}>Sign Up Now</Button>
         } else {
             formLook = <SignUp />
-            directionButton = <Button style={{marginLeft: '50px', marginBottom: '20px'}} onClick={() => this.setState({account: true})}>Already Have an Account?</Button>
+            directionButton = <Button color="primary" style={{marginLeft: '50px', marginBottom: '20px'}} onClick={() => this.setState({account: true})}>Already Have an Account?</Button>
         }
         return(
             <div style={{margin:0, padding: 0}}>

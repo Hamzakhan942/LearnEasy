@@ -45,7 +45,7 @@ export class QuizCardFigures extends Component {
                     </div>
                     <img src={this.props.question} alt={"question"} width="200px" height="150px"/>
                 </Col>
-                <h1>Pick One {this.state.score}</h1>
+                <h1>Pick One: </h1>
                 <Col>
                     <Row>
                         <Col className="mx-2">

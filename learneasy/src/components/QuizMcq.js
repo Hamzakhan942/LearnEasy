@@ -42,7 +42,7 @@ export class QuizMcq extends Component {
                     </div>
                     <img src={this.props.question} alt={"Question"} width="200px" height="150px"/>
                 </Col>
-                <h1>Pick One {this.state.score}</h1>
+                <h1>Pick One: </h1>
                 <Col>
                     <Row>
                         <Col className="mx-2">

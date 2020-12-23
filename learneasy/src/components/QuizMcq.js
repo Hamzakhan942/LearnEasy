@@ -13,24 +13,44 @@ export class QuizMcq extends Component {
             'option2': false,
             'option3': false,
             'option4': false,
-            score: 0
+            score: 0,
+            picked: false,
+            corr: false,
+            incorr: false
         }
         this.onChoiceSelection = this.onChoiceSelection.bind(this)
     }
 
     onChoiceSelection(e){
+        if(!this.state.picked || !this.state.score){
+            this.setState({[e.target.name]: true}, () => {
+                if(this.state[this.state.correct]){
+                    this.setState({[e.target.name]: false, score: 1, picked: true, corr: true, incorr: false})
+                    this.props.scorer()
+                }
+                else{
+                    this.setState({[e.target.name]: false, score: 0, picked: true, incorr: true, corr: false})
+                }
+            })
+        }
         this.setState({[e.target.name]: true}, () => {
             if(this.state[this.state.correct]){
-                this.setState({[e.target.name]: false, score: 1})
-                this.props.scorer()
+                this.setState({[e.target.name]: false, picked: true, corr: true, incorr: false})
             }
             else{
-                this.setState({[e.target.name]: false, score: 0})
+                this.setState({[e.target.name]: false, picked: true, incorr: true, corr: false})
             }
         })
+        return false
     }
     
     render() {
+        let indicator = <h1>Pick One: </h1>;
+        if(this.state.picked && this.state.corr){
+            indicator = <h1 style={{color: 'green'}}><span>&#10003;</span> Good Work </h1>
+        } else if(this.state.picked && this.state.incorr){
+            indicator = <h1 style={{color: 'red',}}><span>&#10539;</span> Oops... Try again </h1>
+        }
         return (
             <Container>
             <Row>
@@ -42,29 +62,29 @@ export class QuizMcq extends Component {
                     </div>
                     <img src={this.props.question} alt={"Question"} width="200px" height="150px"/>
                 </Col>
-                <h1>Pick One: </h1>
+                {indicator}
                 <Col>
                     <Row>
                         <Col className="mx-2">
-                        <Button type="radio" name='option1' onClick={this.onChoiceSelection}>
-                        <h1>{this.props.one}</h1>
+                        <Button className="p-3" style={{fontSize: '18px'}} type="radio" name='option1' onClick={this.onChoiceSelection}>
+                        {this.props.one}
                         </Button>
                         </Col>
                         <Col>
-                        <Button type="radio" name='option2' onClick={this.onChoiceSelection}>
-                        <h1>{this.props.two}</h1>
+                        <Button className="p-3" style={{fontSize: '18px'}} type="radio" name='option2' onClick={this.onChoiceSelection}>
+                        {this.props.two}
                         </Button>
                         </Col>
                     </Row>
                     <Row className="my-5">
                         <Col className="mx-2">
-                        <Button type="radio" name='option3' onClick={this.onChoiceSelection}>
-                        <h1>{this.props.three}</h1>
+                        <Button className="p-3" style={{fontSize: '18px'}} type="radio" name='option3' onClick={this.onChoiceSelection}>
+                        {this.props.three}
                         </Button>
                         </Col>
                         <Col>
-                        <Button type="radio" name='option4' onClick={this.onChoiceSelection}>
-                        <h1>{this.props.four}</h1>
+                        <Button className="p-3" style={{fontSize: '18px'}} type="radio" name='option4' onClick={this.onChoiceSelection}>
+                        {this.props.four}
                         </Button>
                         </Col>
                     </Row>

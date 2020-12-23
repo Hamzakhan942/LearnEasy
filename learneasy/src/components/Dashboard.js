@@ -5,6 +5,7 @@ import ScoreCard from './ScoreCard';
 import { Link } from "react-router-dom";
 import Unauth from './Unauth.js'
 import { Spinner } from 'reactstrap';
+import ModalExample from "./LogOut"
 
 export default class Dashboard extends Component {
 
@@ -42,6 +43,13 @@ export default class Dashboard extends Component {
             console.log(this.state)
         }).catch(err => this.setState({waiting: false}))
     }
+
+    toggle = (e) => {
+        this.setState(prevState => ({
+            modal: !prevState.modal,
+        }))
+    }
+    
     render(){
         if(this.state.authorize && !this.state.waiting){
             return(
@@ -52,6 +60,8 @@ export default class Dashboard extends Component {
                         <CardTitle tag="h5">Ready for a quiz?</CardTitle>
                         <CardText>Click the button below a to begin!</CardText>
                         <Link to="/takequiz"><Button color="primary"> Take a Quiz</Button></Link>
+                        <Button  style={{marginLeft: '50px'}} color="danger" onClick={this.toggle} >Log Out</Button>
+                        {this.state.modal ? <ModalExample buttonLabel={"yes"} toggle={this.toggle} modal={this.state.modal}/> : ""}
                     </CardBody>
                 </Card>
                 {this.state.scores.map(item => <ScoreCard subject={item.subject} total={item.total} marks={item.score} comments={item.comments}/>)}

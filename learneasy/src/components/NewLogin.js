@@ -41,7 +41,7 @@ export default class Login extends Component {
             if(!response.data.error){
                 console.log('Succesful Login In ');
                 console.log(response);
-                this.setState({redirectTo: '/student/dashboard'})
+                this.setState({redirectTo: '/dashboard'})
             } else {
                 console.log('Log In error: '+response.data.error);
                 // this.setState({redirectTo: '/signup'})
@@ -63,7 +63,8 @@ export default class Login extends Component {
         return(
             <div className="container">
                 <br/>
-                <h1>Login Form</h1>
+                <h1>Login</h1>
+                <hr />
             <Form className="mt-4" onSubmit={this.onSubmit}>
                 <Form.Group controlId="formBasicRollno" >
                     <Form.Label>Roll No</Form.Label>
@@ -77,7 +78,7 @@ export default class Login extends Component {
                 <Button variant="primary" type="submit" >
                     Login
                 </Button>
-                <Link className="mx-4"to='/student/signup'>Sign Up</Link>
+                <Link className="mx-4"to='/signup'>Sign Up</Link>
             </Form> 
             </div>
         )

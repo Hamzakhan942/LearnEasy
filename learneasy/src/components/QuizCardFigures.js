@@ -14,26 +14,44 @@ export class QuizCardFigures extends Component {
             'option2': false,
             'option3': false,
             'option4': false,
-            score: 0
+            score: 0,
+            picked: false,
+            corr: false,
+            incorr: false
         }
         this.onChoiceSelection = this.onChoiceSelection.bind(this)
     }
 
     onChoiceSelection(e){
-        console.log("lets see " + this.state[this.state.correct])
+        if(!this.state.picked || !this.state.score){
+            this.setState({[e.target.name]: true}, () => {
+                if(this.state[this.state.correct]){
+                    this.setState({[e.target.name]: false, score: 1, picked: true, corr: true, incorr: false})
+                    this.props.scorer()
+                }
+                else{
+                    this.setState({[e.target.name]: false, score: 0, picked: true, incorr: true, corr: false})
+                }
+            })
+        }
         this.setState({[e.target.name]: true}, () => {
             if(this.state[this.state.correct]){
-                this.setState({[e.target.name]: false, score: 1})
-                this.props.scorer()
+                this.setState({[e.target.name]: false, picked: true, corr: true, incorr: false})
             }
             else{
-                this.setState({[e.target.name]: false, score: 0})
+                this.setState({[e.target.name]: false, picked: true, incorr: true, corr: false})
             }
         })
+        return false
     }
     
     render() {
-        console.log(this.state)
+        let indicator = <h1>Pick One: </h1>;
+        if(this.state.picked && this.state.corr){
+            indicator = <h1 style={{color: 'green'}}><span>&#10003;</span> Good Work </h1>
+        } else if(this.state.picked && this.state.incorr){
+            indicator = <h1 style={{color: 'red',}}><span>&#10539;</span> Oops... Try again </h1>
+        }
         return (
             <Container>
             <Row>
@@ -45,30 +63,30 @@ export class QuizCardFigures extends Component {
                     </div>
                     <img src={this.props.question} alt={"question"} width="200px" height="150px"/>
                 </Col>
-                <h1>Pick One: </h1>
+                {indicator}
                 <Col>
                     <Row>
                         <Col className="mx-2">
-                        <Button type="submit" className="p-12 m-12" color='white' name='option1' onClick={this.onChoiceSelection}>
-                        <img src={this.props.one} alt={"Option 1"} width="80px" height="80px"/>
-                        </Button>
+                        <a name='option1' onClick={this.onChoiceSelection} style={{cursor:'pointer'}}>
+                            <img name='option1' src={this.props.one} alt={"option 1"} width="80px" height="80px" />
+                        </a>
                         </Col>
                         <Col>
-                        <Button type="radio" className="p-12 m-12" color='white' name='option2' onClick={this.onChoiceSelection}>
-                        <img src={this.props.two} alt={"Option 2"} width="80px" height="80px"/>
-                        </Button>
+                        <a name='option2' onClick={this.onChoiceSelection} style={{cursor:'pointer'}}>
+                            <img name='option2' src={this.props.two} alt={"option 2"} width="80px" height="80px" />
+                        </a>
                         </Col>
                     </Row>
                     <Row className="my-5">
                         <Col className="mx-2">
-                        <Button type="radio" className="p-12 m-12" color='white' name='option3' onClick={this.onChoiceSelection}>
-                        <img src={this.props.three} alt={"Option 3"} width="80px" height="80px"/>
-                        </Button>
+                        <a href="javascript:;" name='option3' onClick={this.onChoiceSelection} style={{cursor:'pointer'}}>
+                            <img name='option3' src={this.props.three} alt={"option 3"} width="80px" height="80px" />
+                        </a>
                         </Col>
                         <Col>
-                        <Button type="radio" className="p-12 m-12" color='white' name='option4' onClick={this.onChoiceSelection}>
-                        <img src={this.props.four} alt={"Option 4"} width="80px" height="80px"/>
-                        </Button>
+                        <a name='option4' onClick={this.onChoiceSelection} style={{cursor:'pointer'}}>
+                            <img name='option4' src={this.props.four} alt={"option 4"} width="80px" height="80px" />
+                        </a>
                         </Col>
                     </Row>
                 </Col>

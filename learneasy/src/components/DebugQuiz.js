@@ -16,13 +16,13 @@ import QuizMcq from './QuizMcq'
 import { Spinner } from 'reactstrap';
 import Unauth from './Unauth.js'
 
-export class TakeQuiz extends Component {
+export class DebugQuiz extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            waiting: true,
-            authorize: false,
+            waiting: false,
+            authorize: true,
             subject: "Cognitive Recall",
             score: 0,
             total: 10,
@@ -32,28 +32,28 @@ export class TakeQuiz extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    componentDidMount(){
-        axios.get('/student/details')
-        .then(response => response.data)
-        .then(details => {
-            this.setState({
-                waiting: false,
-                authorize: true,
-            })
-        }).catch(err => this.setState({waiting: false}))
-    }
+    // componentDidMount(){
+    //     axios.get('/student/details')
+    //     .then(response => response.data)
+    //     .then(details => {
+    //         this.setState({
+    //             waiting: false,
+    //             authorize: true,
+    //         })
+    //     }).catch(err => this.setState({waiting: false}))
+    // }
 
     handleScore(){
         this.setState({score: this.state.score + 1})
     }
     
     handleSubmit(e){
-        axios.post('/student/score', {
-            subject: this.state.subject,
-            score: this.state.score,
-            total: this.state.total,
-            comments: this.state.comments
-        }).then(window.location.replace('http://localhost:3000/dashboard'))
+        // axios.post('/student/score', {
+        //     subject: this.state.subject,
+        //     score: this.state.score,
+        //     total: this.state.total,
+        //     comments: this.state.comments
+        // }).then(window.location.replace('http://localhost:3000/dashboard'))
     }
     
     render() {
@@ -99,4 +99,4 @@ export class TakeQuiz extends Component {
     }
 }
 
-export default TakeQuiz;
+export default DebugQuiz;

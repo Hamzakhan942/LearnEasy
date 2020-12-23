@@ -73,7 +73,8 @@ export default class Login extends Component {
         return(
             <div className="container">
                 <br/>
-                <h1>Sign Up Form</h1>
+                <h1>Sign Up</h1>
+                <hr />
             <Form className="mt-4" onSubmit={this.onSubmit}>
                 <Form.Group controlId="formBasicUsername" >
                     <Form.Label>User Name</Form.Label>

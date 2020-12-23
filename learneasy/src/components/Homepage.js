@@ -54,7 +54,7 @@ export default class Home extends Component {
                     <Row style={{minWidth: '100%', minHeight: '100vh', background: '#4c75a3', marginTop: '0px'}}>
                         <Col lg={{size: 7, order: 1}} md={{size: 12, order: 1}} sm={{size: 12, order: 1}} xs={{size: 12, order: 1}} className="px-5">
                             <h1 style={{marginTop: '20px', color:"white"}}>Why We Need Learn Easy</h1>
-                            <hr />
+                            <hr className="my-5"/>
                             <p style={{marginTop: '20px', color:"wheat", fontSize: '18px'}}>As per the latest statistics available by the National Institute of Health, over 8% of the general population has some kind of learning disability. Learning disabilities can range across a spectrum depending on the severity of the case but can be broadly defined as the difficulty in understanding and comprehending information as well as the inability to communicate it
 
                             With such a large number of people suffering with learning disabilities, it is integral to put forth solutions to their daily problems for the purpose of educating them effectively.
@@ -89,7 +89,7 @@ export default class Home extends Component {
                         </Col>
                         <Col style={{overflow: "hidden"}} lg={{size: 5, order: 1}} md={{size: 12, order: 1}} sm={{size: 12, order: 1}} xs={{size: 12, order: 1}} className="px-5">
                             <h1 style={{marginTop: '20px', color:"white"}}>Students Have Individual Needs</h1>
-                            <hr/>
+                            <hr className="my-0"/>
                             <p style={{marginTop: '20px', color:"wheat", fontSize: '18px'}}>
                             Our system exploits the understanding of learning disabilities and the
                             conclusion that people with learning disabilities have trouble remembering and

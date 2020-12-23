@@ -63,7 +63,7 @@ export default class Login extends Component {
                 console.log('Succesful SignUp ');
                 console.log(response);
                 this.setState({isWaiting: false})
-                window.location.replace("http://localhost:3000/login")
+                window.location.replace("/login")
             } else {
                 console.log('Sign Up error: '+response.data.error);
                 alert("User with this rollno. Already Exists!")

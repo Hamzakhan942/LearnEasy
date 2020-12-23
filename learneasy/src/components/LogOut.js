@@ -13,7 +13,7 @@ const ModalExample = (props) => {
       if(!response.data.error){
           console.log('Succesful Login out');
           console.log(response);
-          window.location.replace('http://localhost:3000/')
+          window.location.replace('/')
       } else {
           console.log('Log out error: '+response.data.error);
       }

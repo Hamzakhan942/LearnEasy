@@ -28,12 +28,12 @@ export class Unauth extends Component {
                 <Col>
                     <Row>
                         <Col className="mx-2">
-                        <Button name='login' onClick={(e) => window.location.replace('http://localhost:3000/login')} color="primary">
+                        <Button name='login' onClick={(e) => window.location.replace('/login')} color="primary">
                         Click to Log In!
                         </Button>
                         </Col>
                         <Col>
-                        <Button name='home' onClick={(e) => window.location.replace('http://localhost:3000/')} color="secondary">
+                        <Button name='home' onClick={(e) => window.location.replace('/')} color="secondary">
                         Go Back to Homepage
                         </Button>
                         </Col>

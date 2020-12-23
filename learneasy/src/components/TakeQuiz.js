@@ -53,7 +53,7 @@ export class TakeQuiz extends Component {
             score: this.state.score,
             total: this.state.total,
             comments: this.state.comments
-        }).then(window.location.replace('http://localhost:3000/dashboard'))
+        }).then(window.location.replace('/dashboard'))
     }
     
     render() {

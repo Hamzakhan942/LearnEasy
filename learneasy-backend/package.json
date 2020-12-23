@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../learneasy && npm run build --prefix ../learneasy"
+    "start": "node server.js",
+    "heroku-postbuild": "cd ../learneasy && npm install && npm run build"
   },
   "keywords": [],
   "author": "",

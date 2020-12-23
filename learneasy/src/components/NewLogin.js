@@ -39,7 +39,7 @@ export default class Login extends Component {
             password: this.state.password
         })
         .then(response => {
-            window.location.replace("http://localhost:3000/dashboard")
+            window.location.replace("/dashboard")
         })
         .catch(err => {
             this.setState({isWaiting: false, rollno: '', password: ""})

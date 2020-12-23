@@ -23,5 +23,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
   },
+  "engines": {
+    "node": "10.16.0"
+  },
   "proxy": "http://localhost:5000"
 }

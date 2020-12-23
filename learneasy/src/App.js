@@ -11,8 +11,8 @@ import NewNav from './components/NewNavbar'
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import DebugQuiz from './components/DebugQuiz';
-
+// import DebugQuiz from './components/DebugQuiz';
+// <Route path="/debug" exact component={DebugQuiz}/>
 function App() {
   return (
     <div>
@@ -20,7 +20,6 @@ function App() {
       <NewNav />
       <Route path="/" exact component={Home}/>
         <Route path="/aboutus" exact component={AboutUs}/>
-        <Route path="/debug" exact component={DebugQuiz}/>
         <Route path="/login" exact component={NewLogin}/>
         <Route path="/signup" exact component={SignUp}/>
         <Route path="/takequiz" exact component={TakeQuiz}/>

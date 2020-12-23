@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row} from 'reactstrap';
+import { Row} from 'reactstrap';
 import { Card, Container, Col } from 'reactstrap';
 import './styles/quizStyle.css';
 
@@ -22,7 +22,7 @@ export class QuizCardFigures extends Component {
         this.onChoiceSelection = this.onChoiceSelection.bind(this)
     }
 
-    onChoiceSelection(e){
+    onChoiceSelection(e){ 
         if(!this.state.picked || !this.state.score){
             this.setState({[e.target.name]: true}, () => {
                 if(this.state[this.state.correct]){

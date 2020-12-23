@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('./passport');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -51,6 +52,13 @@ mongoose.set('useFindAndModify', false);
 
 const studentRouter = require('./routes/student');
 app.use('/student', studentRouter); 
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static( '../learneasy/build' ));
+    app.get('*', (req, res)=>{
+        res.sendFile(path.resolve(__dirname, '../', 'learneasy', 'build', 'index.html'));
+    });
+}
 
 module.exports = app
 
